@@ -76,7 +76,9 @@ PRIMARY KEY (id)
 
 
 -- 11.
-Set the delimiter to | before running the following query
+-- Set the delimiter to | before running the following query
+-- DELIMITER |
+
 
 CREATE TRIGGER before_employee_update_(your roll number)
 BEFORE UPDATE ON employees
@@ -92,6 +94,22 @@ END|
 -- Update a record in the employees table and check the employees_audit table.
 
 -- Why do you think we need to change the delimiter?
+-- because the trigger definition contains semicolons as part of the BEGIN and END statements. If the delimiter were left as the default semicolon, MySQL would interpret the semicolons within the trigger definition as the end of the CREATE TRIGGER statement, resulting in a syntax error.
+-- This code creates a trigger in MySQL that will execute a certain action before an update on the employees table. Specifically, the trigger will do the following:
+
+--     It will execute before an update on the employees table.
+--     It will be defined to execute for each row that is updated.
+--     It will insert a new row into the employees_audit table.
+--     The new row will have the following values:
+--         action will be set to the string 'update'
+--         employeeNumber will be set to the value of the employeeNumber column in the old row (i.e., the row before it was updated)
+--         lastname will be set to the value of the lastname column in the old row
+--         changedon will be set to the current date and time (using the NOW() function)
+
+-- The trigger will be given the name before_employee_update_(your roll number), where (your roll number) should be replaced with your actual roll number.
+
+-- This trigger can be useful for auditing purposes, as it will keep a record of the old values of the employeeNumber and lastname columns for each row that is updated in the employees table.
+
 
 -- 12.
 SELECT * FROM Information_Schema.Triggers
