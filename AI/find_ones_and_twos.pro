@@ -1,0 +1,17 @@
+DOMAINS
+list=integer*
+PREDICATES
+disp(list,list)
+CLAUSES
+disp([],[]).
+disp([H|T],L):-
+H>0,
+H<=2,
+disp(T,L1),
+L=[H|L1].
+disp([H|T],L):-
+H<>1,
+H<>2,
+disp(T,L).
+GOAL
+disp([1,2,3],X).

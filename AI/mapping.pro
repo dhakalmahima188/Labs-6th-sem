@@ -1,0 +1,9 @@
+predicates
+PLAY(symbol,symbol)
+clauses
+PLAY("mahima",cricket).
+PLAY("virat",cricket).
+PLAY("dhoni",football).
+PLAY("samana",volleyball).
+goal
+PLAY(mahima,X).

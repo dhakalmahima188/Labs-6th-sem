@@ -1,0 +1,11 @@
+DOMAINS
+list=integer*
+PREDICATES
+del(list,integer,list)
+CLAUSES
+del([X],X,[]).
+del([X|T],X,T).
+del([H|L],X,[H|M]):-
+del(L,X,M).
+GOAL
+del([1,2,3],1,X).
