@@ -1,4 +1,5 @@
 #include <reg51.h>
+#define N 10
 unsigned char led_pattern[10] = { 
 0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 
 0x7d, 0x07, 0x7f, 0x6f};
@@ -7,6 +8,7 @@ void delay(int time)
 unsigned int i,j;
 for (i=0;i<time;i++)
 for (j=0;j<125;j++);
+
 }
 void display(unsigned int i)
 {
@@ -25,12 +27,11 @@ delay(40);
 }
 void main(void)
 {
-unsigned int i;
+unsigned int i, fibo_seq[N]={0, 1};
+for(i=2; i<N; i++)
+fibo_seq[i] = fibo_seq[i-1] + 
+fibo_seq[i-2];
 while(1)
-{
-for(i=0; i<20; i++)
-display(i);
-for(i=20; i>0; i--)
-display(i);
-}
+for(i=0; i<N; i++)
+display(fibo_seq[i]);
 }
