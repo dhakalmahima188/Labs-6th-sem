@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
     DIR *dp;
     struct dirent
         *dirp;
+    char currentdir = '.';
     if (argc < 2)
     {
         printf("\n You have provided only 1 argument\n");

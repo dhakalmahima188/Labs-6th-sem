@@ -29,12 +29,12 @@ int avgTime(int proc[], int n, int burst_time[]){
     waitingTime(proc, n, burst_time, wait_time);
     turnAroundTime(proc, n, burst_time, wait_time, tat);
 
-    printf("ProcessesId  Burst   Waiting Turn around \n");
+    printf("Processes  Burst   Waiting Turn around \n");
     // calculate total waiting time and total turn around time
     for(i = 0; i < n; i++){
         total_wt += wait_time[i];
         total_tat += tat[i];
-        printf("%d\t\t  %d\t %d \t%d\n", proc[i], burst_time[i], wait_time[i], tat[i]);
+        printf("%d\t  %d\t\t %d \t%d\n", i+1, burst_time[i], wait_time[i], tat[i]);
     }
 
     printf("Average waiting time = %f\n", (float)total_wt / (float)n);
@@ -42,32 +42,10 @@ int avgTime(int proc[], int n, int burst_time[]){
     return 0;
 }
 
-void swap(int* xp, int* yp)
-{
-    int temp = *xp;
-    *xp = *yp;
-    *yp = temp;
-}
-
-int shortestJobFirst(int proc[], int n, int burst_time[]){
-    int shortest_process_queue[n];
-    for (int i = 0; i < n - 1; i++){
-        // last i elements are already in place
-        for (int j = 0; j < n - i - 1; j++){
-            if (burst_time[j] > burst_time[j + 1]){
-                swap(&burst_time[j], &burst_time[j + 1]);
-                swap(&proc[j], &proc[j + 1]);
-            }
-        }
-    }
-    avgTime(proc, n, burst_time);
-    return 0;
-}
-
 int main(){
-    int proc[] = {5, 2, 3, 4, 100, 457};
+    int proc[] = {1, 2, 3,4};
     int n = sizeof proc / sizeof proc[0];
-    int burst_time[] = {8, 5, 12, 5, 100, 1};
-    shortestJobFirst(proc, n, burst_time);
+    int burst_time[] = {10, 5, 15,20};
+    avgTime(proc, n, burst_time);
     return 0;
 }
