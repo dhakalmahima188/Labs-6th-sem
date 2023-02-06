@@ -1,0 +1,18 @@
+ORG 00H
+		MOV TMOD,#01
+HERE: 	SETB P2.0
+		ACALL DELAY
+		CLR P2.0
+		MOV R4,#04 ; 20 % duty cycle
+L1:		ACALL DELAY
+		DJNZ R4,L1
+		SJMP HERE
+		
+DELAY:	MOV TL0,#32H
+		MOV TH0,#15H
+		SETB TR0 ;timer run 1_ timer 1 selected
+AGAIN:	JNB TF0,AGAIN
+		CLR TR0
+		CLR TF0
+		RET
+END
